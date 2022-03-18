@@ -1,17 +1,10 @@
 <x-layout>
-    <div class="mt-10">
-        @foreach ($posts as $post)
-            <h1>
-                <a href="{{ route('posts.view', $post) }}">
-                    {{ $post->title }}
-                </a>
-            </h1>
+    @include('_posts-header')
 
-            <p>
-                By <a href="{{ route('authors.view', $post->author) }}">{{ $post->author->name }}</a> in <a href="{{ route('categories.view', $post->category) }}">{{ $post->category->name }}</a>
-            </p>
-
-            {{ $post->excerpt }}
-        @endforeach
-    </div>
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+        @if ($posts->count())
+            <x-posts-grid :posts="$posts" />
+        @endif
+            <p class="text-center">No posts yet, check back later</p>
+    </main>
 </x-layout>
