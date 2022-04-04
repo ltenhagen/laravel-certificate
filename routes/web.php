@@ -1,14 +1,18 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.view');
 Route::post('/posts/{post:slug}/comments', [PostCommentsController::class, 'store'])->name('posts.comments.store');
+
+Route::post('/newsletter', NewsletterController::class)->name('newsletter.subscribe');
 
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register.create');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.store');
