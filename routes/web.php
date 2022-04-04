@@ -9,14 +9,17 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [PostController::class, 'index'])->name('home');
-Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.view');
-Route::post('/posts/{post:slug}/comments', [PostCommentsController::class, 'store'])->name('posts.comments.store');
+Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.view');
+Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store'])->name('posts.comments.store');
 
-Route::post('/newsletter', NewsletterController::class)->name('newsletter.subscribe');
+Route::post('newsletter', NewsletterController::class)->name('newsletter.subscribe');
 
-Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register.create');
-Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.store');
+Route::get('register', [RegisterController::class, 'create'])->middleware('guest')->name('register.create');
+Route::post('register', [RegisterController::class, 'store'])->middleware('guest')->name('register.store');
 
-Route::get('/login', [SessionsController::class, 'create'])->name('sessions.create')->middleware('guest');
-Route::post('/sessions', [SessionsController::class, 'store'])->name('sessions.store')->middleware('guest');
-Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth')->name('sessions.destroy');
+Route::get('login', [SessionsController::class, 'create'])->name('sessions.create')->middleware('guest');
+Route::post('sessions', [SessionsController::class, 'store'])->name('sessions.store')->middleware('guest');
+Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth')->name('sessions.destroy');
+
+Route::get('admin/posts/create', [PostController::class, 'create'])->middleware('admin')->name('posts.create');
+Route::post('admin/posts', [PostController::class, 'store'])->middleware('admin')->name('posts.store');
